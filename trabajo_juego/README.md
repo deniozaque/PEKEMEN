@@ -1,18 +1,45 @@
-## Getting Started
+# Juego de Combate por Turnos
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Juego de consola hecho en Java donde juegas batallas usando tres tipos: Fuego, Agua y Planta.
 
-## Folder Structure
+---
 
-The workspace contains two folders by default, where:
+## Como funciona el juego
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+En este juego eliges un elemento (fuego, agua o planta) y te enfrentas a la maquina por turnos. 
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+Dependiendo del elemento que elijas tendras ventaja o desventaja contra el enemigo. Durante tu turno puedes decidir entre atacar o usar una pocion para recuperar vida.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+---
 
-## Dependency Management
+## Modos de juego
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+1. **Torneo**: Juegas tres combates seguidos. Si ganas los tres, ganas el torneo.
+2. **Combate singular**: Un combate rapido de una sola ronda contra la maquina.
+3. **Salir**: Cierra el programa.
+
+---
+
+## Opciones en cada turno
+
+Cuando te toque jugar puedes elegir:
+- **1. Atacar**: Hace daño al rival teniendo en cuenta la ventaja de tipos.
+- **2. Curarse**: Recuperas 20 puntos de vida usando una pocion (solo tienes una por partida).
+
+---
+
+## Estructura de carpetas
+
+```text
+trabajo_juego/
+├── src/
+│   └── App.java      # Codigo principal del juego
+├── bin/              # Archivos compilados
+└── README.md         # Explicacion del proyecto
+```
+
+---
+
+## Autor
+
+- Jorge

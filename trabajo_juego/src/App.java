@@ -22,15 +22,15 @@ public class App {
 
         String tipo, tipo_jugador = "", tipo_maquina;
         int elecion, contador, contador_torneo;
-        Double ventaja,vida_jugador,vida_maquina;
+        Double ventaja, vida_jugador, vida_maquina;
         Boolean salir, huir, pocion, torneo;
-        Double potencia= (ram.nextDouble(6.0) + 1) * 10;
+        Double potencia = (ram.nextDouble(6.0) + 1) * 10;
 
         // cuerpo
         salir = false;
         huir = false;
         torneo = false;
-        ventaja=1.0;
+        ventaja = 1.0;
 
         // vucle principal
         while (huir == false) {
@@ -46,7 +46,7 @@ public class App {
                 System.out.println("Adios");
                 huir = true;
                 return;
-            }else{
+            } else {
                 System.out.println("error en hacer del torneo");
             }
 
@@ -67,24 +67,30 @@ public class App {
             do {
                 tipo_maquina = TIPOS[ram.nextInt(TIPOS.length)];
 
-                //calcular ventaja
-                if ((tipo_jugador=="fuego"&&tipo_maquina=="planta")||(tipo_jugador=="planta"&&tipo_maquina=="agua")||((tipo_jugador=="agua"&&tipo_maquina=="fuego"))){
-                    ventaja=1.25;
-                }else if ((tipo_jugador=="planta"&&tipo_maquina=="fuego")||(tipo_jugador=="fuego"&&tipo_maquina=="agua")||((tipo_jugador=="agua"&&tipo_maquina=="planta"))){
-                    ventaja=0.75;
-                }else if (tipo_jugador==tipo_maquina){
-                    ventaja=1.0;
-                }else{
+                // calcular ventaja
+                if ((tipo_jugador == "fuego" && tipo_maquina == "planta")
+                        || (tipo_jugador == "planta" && tipo_maquina == "agua")
+                        || ((tipo_jugador == "agua" && tipo_maquina == "fuego"))) {
+                    ventaja = 1.25;
+                } else if ((tipo_jugador == "planta" && tipo_maquina == "fuego")
+                        || (tipo_jugador == "fuego" && tipo_maquina == "agua")
+                        || ((tipo_jugador == "agua" && tipo_maquina == "planta"))) {
+                    ventaja = 0.75;
+                } else if (tipo_jugador == tipo_maquina) {
+                    ventaja = 1.0;
+                } else {
                     System.out.println("error en ventaja");
                 }
 
                 System.out.println("Tu tipo es " + tipo_jugador + " y el de tu rival es " + tipo_maquina);
                 vida_maquina = 100.0;
                 do {
-                    System.out.printf("Tu vida es %.2f y la del rival es %.2f%nQue quieres hacer%n1. Atacar%n2. Curarte%nElecion: ",vida_jugador, vida_maquina);
+                    System.out.printf(
+                            "Tu vida es %.2f y la del rival es %.2f%nQue quieres hacer%n1. Atacar%n2. Curarte%nElecion: ",
+                            vida_jugador, vida_maquina);
                     elecion = Integer.parseInt(save.readLine());
                     if (elecion == 1) {
-                        vida_maquina -= potencia*ventaja;
+                        vida_maquina -= potencia * ventaja;
                     } else if (elecion == 2 && pocion == true) {
                         System.out.println("Has gastado tu ultima pocion");
                         vida_jugador += 20;
@@ -99,7 +105,7 @@ public class App {
                     }
                 } while (vida_jugador > 0 && vida_maquina > 0);
 
-                //comprovantes
+                // comprovantes
                 if (vida_jugador > 0) {
                     System.out.println("Has ganado");
                     if (contador_torneo == 1) {
