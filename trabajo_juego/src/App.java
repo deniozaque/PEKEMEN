@@ -30,11 +30,11 @@ public class App {
         salir = false;
         huir = false;
         torneo = false;
-        contador_torneo = 1;
         ventaja=1.0;
 
         // vucle principal
         while (huir == false) {
+            contador_torneo = 1;
             vida_jugador = 100.0;
             System.out.printf("Que quieres hacer:%n1. Torneo%n2. Combate singular%n3. Salir%nElecion: ");
             elecion = Integer.parseInt(save.readLine());
@@ -63,22 +63,22 @@ public class App {
             } while (salir == false);
 
             // combate
-            tipo_maquina = TIPOS[ram.nextInt(TIPOS.length)];
-
-            //calcular ventaja
-            if ((tipo_jugador=="fuego"&&tipo_maquina=="planta")||(tipo_jugador=="planta"&&tipo_maquina=="agua")||((tipo_jugador=="agua"&&tipo_maquina=="fuego"))){
-                ventaja=1.25;
-            }else if ((tipo_jugador=="planta"&&tipo_maquina=="fuego")||(tipo_jugador=="fuego"&&tipo_maquina=="agua")||((tipo_jugador=="agua"&&tipo_maquina=="planta"))){
-                ventaja=0.75;
-            }else if (tipo_jugador==tipo_maquina){
-                ventaja=1.0;
-            }else{
-                System.out.println("error en ventaja");
-            }
-
-            System.out.println("Tu tipo es " + tipo_jugador + " y el de tu rival es " + tipo_maquina);
             pocion = true;
             do {
+                tipo_maquina = TIPOS[ram.nextInt(TIPOS.length)];
+
+                //calcular ventaja
+                if ((tipo_jugador=="fuego"&&tipo_maquina=="planta")||(tipo_jugador=="planta"&&tipo_maquina=="agua")||((tipo_jugador=="agua"&&tipo_maquina=="fuego"))){
+                    ventaja=1.25;
+                }else if ((tipo_jugador=="planta"&&tipo_maquina=="fuego")||(tipo_jugador=="fuego"&&tipo_maquina=="agua")||((tipo_jugador=="agua"&&tipo_maquina=="planta"))){
+                    ventaja=0.75;
+                }else if (tipo_jugador==tipo_maquina){
+                    ventaja=1.0;
+                }else{
+                    System.out.println("error en ventaja");
+                }
+
+                System.out.println("Tu tipo es " + tipo_jugador + " y el de tu rival es " + tipo_maquina);
                 vida_maquina = 100.0;
                 do {
                     System.out.printf("Tu vida es %.2f y la del rival es %.2f%nQue quieres hacer%n1. Atacar%n2. Curarte%nElecion: ",vida_jugador, vida_maquina);
