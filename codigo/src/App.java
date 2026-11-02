@@ -1,7 +1,7 @@
 /*
 Autor: Jorge
 Fecha: 2026/27
-Descripción: El juego Pekemen trata de que el jugador elige un elemento para enfrentarse a la máquina en una batalla individual o en un modo torneo eliminatorio. Durante el combate, puedes atacar y otras opciones.
+Descripción: El juego Pekemen trata de que el jugador elige un elemento para enfrentarse a la máquina en una batalla individual o en un modo historia. Durante el combate, puedes atacar y otras opciones.
 */
 
 import java.io.BufferedReader;
@@ -24,6 +24,10 @@ public class App {
         tus_pekemens = new String[6][8];
         String[][] lider_agua;
         lider_agua = new String[3][8];
+        String[][] lider_fuego;
+        lider_fuego = new String[3][8];
+        String[][] lider_planta;
+        lider_planta = new String[3][8];
         String[][] pekemens_rival;
         pekemens_rival = new String[6][8];
         String[] pekemen_salvaje;
@@ -31,7 +35,7 @@ public class App {
         // pekemens:numero, nombre, tipo, vida, nivel, daño maximo, experiencia que va
         String[][] pekemens = {
                 { "1", "Peplet", "agua", "40", "0", "2", "0", "40" },
-                { "2", "Prenplet", "agua", "70", "0", "4", "0", "60" },
+                { "2", "Prenpletpekemens_rival", "agua", "70", "0", "4", "0", "60" },
                 { "3", "Enpeleen", "agua", "100", "0", "6", "0", "75" },
 
                 { "4", "Terteg", "planta", "40", "0", "2", "0", "40" },
@@ -48,18 +52,23 @@ public class App {
                 { "12", "Lexe", "normal", "65", "0", "4", "0", "50" },
                 { "13", "Lexrrey", "normal", "85", "0", "6", "0", "60" },
 
-                { "14", "Tepexes", "agua", "35", "0", "3", "0", "40" },
-                { "15", "Mereene", "agua", "70", "0", "5", "0", "30" }
+                { "14", "Tepexes", "agua", "35", "0", "3", "0", "35" },
+                { "15", "Mereene", "agua", "70", "0", "5", "0", "50" },
+
+                { "16", "Slegme", "fuego", "40", "0", "4", "0", "40" },
+                { "17", "Megcerge", "fuego", "75", "0", "5", "0", "65" },
+
+                { "18", "Cecnee", "planta", "45", "0", "5", "0", "45" },
+                { "19", "Cecterne", "planta", "100", "0", "6", "0", "55" }
         };
 
         String tipo_jugador, tipo_rival, inicial_rival, equipo, cambiar;
         int eleccion, contador_ahogar, eleccion_pekemen, pekemen_rival, fuerza_maxima_jugador, fuerza_maxima_rival,
                 eleccion_salvaje, salvaje, experiencia, posicion, posicion_rival;
-        double ventaja, vida_jugador, vida_rival;
+        double ventaja, vida_jugador, vida_rival, potencia;
         Boolean salir, huir, pocion_jugador, pocion_rival, quemar, envenenar, historia, lider, cambio,
                 enfrentamiento_lider_agua, enfrentamiento_lider_fuego, enfrentamiento_lider_planta, otros_disponibles,
-                perder;
-        Double potencia;
+                perder, enfrentamiento_rival;
 
         // cuerpo
         salir = false;
@@ -70,9 +79,6 @@ public class App {
         enfrentamiento_lider_agua = true;
         posicion = 0;
         posicion_rival = 0;
-        lider_agua[0] = pekemens[13].clone();
-        lider_agua[1] = pekemens[0].clone();
-        lider_agua[2] = pekemens[14].clone();
 
         // bucle principal
         while (huir == false) {
@@ -150,7 +156,9 @@ public class App {
             quemar = false;
             enfrentamiento_lider_fuego = false;
             enfrentamiento_lider_planta = false;
+            enfrentamiento_rival = true;
             envenenar = false;
+            inicial_rival = pekemens_rival[posicion_rival][1];
 
             do {
                 perder = false;
@@ -167,17 +175,35 @@ public class App {
                     } else if (enfrentamiento_lider_agua == false && enfrentamiento_lider_fuego == true) {
                         enfrentamiento_lider_fuego = false;
                         enfrentamiento_lider_planta = true;
+                        lider_fuego[0] = pekemens[7].clone();
+                        lider_fuego[1] = pekemens[15].clone();
+                        lider_fuego[2] = pekemens[16].clone();
+                        pekemens_rival = lider_fuego;
+                        posicion_rival = 0;
                     } else if (enfrentamiento_lider_fuego == false && enfrentamiento_lider_planta == true) {
                         enfrentamiento_lider_planta = false;
+                        lider_planta[0] = pekemens[5].clone();
+                        lider_planta[1] = pekemens[17].clone();
+                        lider_planta[2] = pekemens[18].clone();
+                        pekemens_rival = lider_planta;
+                        posicion_rival = 0;
+                    } else if (enfrentamiento_lider_planta == false && enfrentamiento_rival == true){
+                        pekemens_rival = new String[6][8];
+                        pekemens_rival[0] = pekemens[9].clone();
+                        pekemens_rival[1] = pekemens[12].clone();
+                        pekemens_rival[2] = pekemens[14].clone();
+                        pekemens_rival[3] = pekemens[16].clone();
+                        pekemens_rival[4] = pekemens[18].clone();
+                        pekemens_rival[5] = pekemens[Integer.parseInt(inicial_rival)-1].clone();
+                        posicion_rival = 0;
+                        enfrentamiento_rival = false;
                     }
                 }
 
                 tipo_jugador = tus_pekemens[posicion][2];
                 vida_jugador = Double.parseDouble(tus_pekemens[posicion][3]);
                 fuerza_maxima_jugador = Integer.parseInt(tus_pekemens[posicion][5]);
-
                 tipo_rival = pekemens_rival[posicion_rival][2];
-                inicial_rival = pekemens_rival[posicion_rival][1];
                 vida_rival = Double.parseDouble(pekemens_rival[posicion_rival][3]);
                 fuerza_maxima_rival = Integer.parseInt(pekemens_rival[posicion_rival][5]);
 
@@ -271,8 +297,6 @@ public class App {
                                         quemar = false;
                                         envenenar = false;
                                         contador_ahogar = 9;
-
-                                        // Recalcular ventaja con el nuevo tipo
                                         if ((tipo_jugador == "fuego" && tipo_rival == "planta")
                                                 || (tipo_jugador == "planta" && tipo_rival == "agua")
                                                 || (tipo_jugador == "agua" && tipo_rival == "fuego")) {
@@ -341,7 +365,6 @@ public class App {
                         System.out.println("¡Tu " + tus_pekemens[posicion][1] + " ha sido derrotado!");
                         tus_pekemens[posicion][3] = "0";
 
-                        // Comprobar si queda algún Pekemen vivo en el equipo
                         boolean quedanVivos = false;
                         for (int i = 0; i < tus_pekemens.length; i++) {
                             if (tus_pekemens[i] != null && tus_pekemens[i][1] != null && tus_pekemens[i][3] != null) {
@@ -372,7 +395,6 @@ public class App {
                                             envenenar = false;
                                             contador_ahogar = 9;
 
-                                            // Recalcular ventaja con el nuevo tipo
                                             if ((tipo_jugador == "fuego" && tipo_rival == "planta")
                                                 || (tipo_jugador == "planta" && tipo_rival == "agua")
                                                 || (tipo_jugador == "agua" && tipo_rival == "fuego")) {
@@ -402,8 +424,6 @@ public class App {
                     } else if (vida_rival <= 0) {
                         System.out.println("¡El " + pekemens_rival[posicion_rival][1] + " del rival ha sido derrotado!");
                         pekemens_rival[posicion_rival][3] = "0";
-
-                        // Comprobar si queda algún Pekemen vivo en el equipo del rival
                         boolean rivalQuedanVivos = false;
                         int siguienteRival = -1;
                         for (int i = 0; i < pekemens_rival.length; i++) {
@@ -428,8 +448,6 @@ public class App {
                             quemar = false;
                             envenenar = false;
                             contador_ahogar = 9;
-
-                            // Recalcular ventaja de tipo con el nuevo Pekemen del rival
                             if ((tipo_jugador == "fuego" && tipo_rival == "planta")
                                     || (tipo_jugador == "planta" && tipo_rival == "agua")
                                     || (tipo_jugador == "agua" && tipo_rival == "fuego")) {
@@ -440,6 +458,8 @@ public class App {
                                 ventaja = 0.75;
                             } else if (tipo_jugador == tipo_rival || tipo_jugador == "normal"
                                     || tipo_rival == "normal") {
+                                ventaja = 1.0;
+                            } else {
                                 ventaja = 1.0;
                             }
 
@@ -455,9 +475,13 @@ public class App {
                     break;
                 } else if (vida_rival <= 0) {
                     System.out.println("Has ganado");
+                    lider = false;
                     if (historia == false) {
                         break;
                     }
+                }
+                if (enfrentamiento_rival == false){
+                    break;
                 }
 
                 // elecciones del mundo
