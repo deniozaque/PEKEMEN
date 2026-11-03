@@ -35,7 +35,7 @@ public class App {
         // pekemens:numero, nombre, tipo, vida, nivel, daño maximo, experiencia que va
         String[][] pekemens = {
                 { "1", "Peplet", "agua", "40", "0", "2", "0", "40" },
-                { "2", "Prenpletpekemens_rival", "agua", "70", "0", "4", "0", "60" },
+                { "2", "Prenplet", "agua", "70", "0", "4", "0", "60" },
                 { "3", "Enpeleen", "agua", "100", "0", "6", "0", "75" },
 
                 { "4", "Terteg", "planta", "40", "0", "2", "0", "40" },
