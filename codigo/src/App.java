@@ -79,6 +79,7 @@ public class App {
         enfrentamiento_lider_agua = true;
         posicion = 0;
         posicion_rival = 0;
+        enfrentamiento_rival = true;
 
         // bucle principal
         while (huir == false) {
@@ -113,6 +114,7 @@ public class App {
             }
 
             // eleccion pekemen inicial
+
             do {
                 tus_pekemens = new String[6][8];
                 System.out.println("Escoge un pekemen entre 1. Peplet, 2. Terteg y 3. Chemchemp");
@@ -156,7 +158,6 @@ public class App {
             quemar = false;
             enfrentamiento_lider_fuego = false;
             enfrentamiento_lider_planta = false;
-            enfrentamiento_rival = true;
             envenenar = false;
             inicial_rival = pekemens_rival[posicion_rival][1];
 
@@ -187,14 +188,14 @@ public class App {
                         lider_planta[2] = pekemens[18].clone();
                         pekemens_rival = lider_planta;
                         posicion_rival = 0;
-                    } else if (enfrentamiento_lider_planta == false && enfrentamiento_rival == true){
+                    } else if (enfrentamiento_lider_planta == false && enfrentamiento_rival == true) {
                         pekemens_rival = new String[6][8];
                         pekemens_rival[0] = pekemens[9].clone();
                         pekemens_rival[1] = pekemens[12].clone();
                         pekemens_rival[2] = pekemens[14].clone();
                         pekemens_rival[3] = pekemens[16].clone();
                         pekemens_rival[4] = pekemens[18].clone();
-                        pekemens_rival[5] = pekemens[Integer.parseInt(inicial_rival)-1].clone();
+                        pekemens_rival[5] = pekemens[(pekemen_rival + 1)].clone();
                         posicion_rival = 0;
                         enfrentamiento_rival = false;
                     }
@@ -396,17 +397,17 @@ public class App {
                                             contador_ahogar = 9;
 
                                             if ((tipo_jugador == "fuego" && tipo_rival == "planta")
-                                                || (tipo_jugador == "planta" && tipo_rival == "agua")
-                                                || (tipo_jugador == "agua" && tipo_rival == "fuego")) {
-                                            ventaja = 1.25;
-                                        } else if ((tipo_jugador == "planta" && tipo_rival == "fuego")
-                                                || (tipo_jugador == "fuego" && tipo_rival == "agua")
-                                                || (tipo_jugador == "agua" && tipo_rival == "planta")) {
-                                            ventaja = 0.75;
-                                        } else if (tipo_jugador == tipo_rival || tipo_jugador == "normal"
-                                                || tipo_rival == "normal") {
-                                            ventaja = 1.0;
-                                        }
+                                                    || (tipo_jugador == "planta" && tipo_rival == "agua")
+                                                    || (tipo_jugador == "agua" && tipo_rival == "fuego")) {
+                                                ventaja = 1.25;
+                                            } else if ((tipo_jugador == "planta" && tipo_rival == "fuego")
+                                                    || (tipo_jugador == "fuego" && tipo_rival == "agua")
+                                                    || (tipo_jugador == "agua" && tipo_rival == "planta")) {
+                                                ventaja = 0.75;
+                                            } else if (tipo_jugador == tipo_rival || tipo_jugador == "normal"
+                                                    || tipo_rival == "normal") {
+                                                ventaja = 1.0;
+                                            }
 
                                             System.out.println("¡Adelante " + tus_pekemens[posicion][1] + "!");
                                             cambio = true;
@@ -422,12 +423,14 @@ public class App {
                             perder = false;
                         }
                     } else if (vida_rival <= 0) {
-                        System.out.println("¡El " + pekemens_rival[posicion_rival][1] + " del rival ha sido derrotado!");
+                        System.out
+                                .println("¡El " + pekemens_rival[posicion_rival][1] + " del rival ha sido derrotado!");
                         pekemens_rival[posicion_rival][3] = "0";
                         boolean rivalQuedanVivos = false;
                         int siguienteRival = -1;
                         for (int i = 0; i < pekemens_rival.length; i++) {
-                            if (pekemens_rival[i] != null && pekemens_rival[i][1] != null && pekemens_rival[i][3] != null) {
+                            if (pekemens_rival[i] != null && pekemens_rival[i][1] != null
+                                    && pekemens_rival[i][3] != null) {
                                 if (Double.parseDouble(pekemens_rival[i][3]) > 0) {
                                     rivalQuedanVivos = true;
                                     siguienteRival = i;
@@ -480,7 +483,7 @@ public class App {
                         break;
                     }
                 }
-                if (enfrentamiento_rival == false){
+                if (enfrentamiento_rival == false) {
                     break;
                 }
 
