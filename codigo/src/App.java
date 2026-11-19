@@ -491,6 +491,11 @@ public class App {
                     }
             } while (!modo_juego.equals("1") && !modo_juego.equals("2") && !modo_juego.equals("3") && !modo_juego.equals("4"));
             if (huir == false) {
+                posicion = 0;
+                pekemen_rival = 0;
+                pekemens_rival = new String[8][8];
+                pekemens_rival[7][0] = "1";
+                pekemens_rival[7][1] = "" + pekemen_rival;
 
                 // elección pekemen inicial
                 tus_pekemens = elegirPekemen(pekemens);

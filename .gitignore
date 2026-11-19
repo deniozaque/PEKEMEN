@@ -12,3 +12,4 @@ target/
 
 # Archivos con información confidencial
 .env
+*.env
